@@ -830,7 +830,7 @@ void MooringModel::GenerateCatenaryDisplacement(Line& line, Matrix& F, std::vect
 
 #ifdef MAP_SOLUTION_ITERATIONS
 	std::cout << "----------------------------------------\n";
-	std::cout << "\nStatic tension along the length \n\n" << std::setprecision(10);
+	std::cout << "\nStatic tension along the length \n\n" << std::setprecision(16);
 #endif
 
 	double sum_len = 0.0;

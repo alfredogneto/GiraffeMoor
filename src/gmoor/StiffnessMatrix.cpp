@@ -303,7 +303,7 @@ std::ostream& operator<<(std::ostream& out, const StiffnessMatrix& mat)
 }
 std::ostream& operator<<(std::ostream& out, StiffnessMatrix* mat)
 {
-	out << std::setprecision(5) << "\n";
+	out << std::setprecision(16) << "\n";
 	for (long i = 0; i < mat->m_K_tan.getLines(); ++i)
 	{
 		out << "| ";
@@ -316,7 +316,7 @@ std::ostream& operator<<(std::ostream& out, StiffnessMatrix* mat)
 		}
 		out << "|\n";
 	}
-	out << std::setprecision(8) << "\n";
+	out << std::setprecision(16) << "\n";
 
 	return out;
 }

@@ -1674,7 +1674,7 @@ void IO::WriteGiraffeModelFile()
 
 	//General formatting
 	fgir.setf(std::ofstream::scientific);	//Use scientific notation to float points
-	fgir << std::setprecision(8);			//Default precision for float points
+	fgir << std::setprecision(16);			//Default precision for float points
 
 	fgir << "\nSolutionSteps\t" << gm.solution_vector.size() << "\n";
 	for (auto&& sol: gm.solution_vector)
