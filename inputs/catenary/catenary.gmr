@@ -1,0 +1,64 @@
+//Example for a catenary riser configuration - based on A. Gay Neto / Engineering Structures 125 (2016) 438–454
+
+//Keypoints are used to establish key geometry points to attach a floating unit, a riser anchor or a riser fairlead
+Keypoints
+//Floating unit position (reference point)
+	Keypoint 1	X	3731.368	Y	0	Z	0
+//Anchor - catenary riser
+	Keypoint 2	X 0		Y 0	Z	-1709
+//Fairlead - catenary riser
+	Keypoint 3	X 	3731.368	Y 	0	Z	0
+
+//Segment sets are used to define lengths, properties and discretizations of segments to be used, after, when assemblying lines. 
+//Each segment set is used to define a line. A segment set can be formed by several portions of lengths, properties and discretizations.
+SegmentSets
+	Set 1
+		Length 5000	Property 1 	Discretization	339
+
+//Lines are defined using segment sets 
+Lines
+	Line 1	Anchor 2	Fairlead 3 		VesselID 1 	SegmentSet 1
+
+//Vessels are defined defining a PilotNode (as the reference point), inertia and mass properties (rigid body)
+Vessels
+	Vessel	1	PilotNode	1	InertiaTensor	0 0 0 0 0 0	Mass 0
+	
+//Segment properties are used to define a mooring line or riser property
+SegmentProperties
+//Flexible pipe
+	SegmentProperty	1 beam
+	SpecificMass 120	Diameter 0.25	
+	EA 400e6	EI 15e3	GA 200e6	GJ 2.25e6
+	CDt 0	CDn 1	CAt 0	CAn 1
+ 
+Environment
+	General
+		Gravity	9.81	RhoFluid 1024	WaterDepth 1709
+	Seabed flat 	
+		Stiffness 2.5e5 	Damping 0 	FrictionCoefficient	0.5 
+	SeaCurrent
+		Depth 0		Speed 0	Azimuth -45
+		Depth 1709	Speed 0	Azimuth -45
+
+
+Solution
+	SeaCurrentStep
+		Duration 1.0	TimeStep 0.1
+	Analysis
+		Step 1 static 	Duration	1.0	TimeStep 1.0  MinTimeStep	1.0e-5	Sample  1
+		
+StiffnessMatrix
+	Analytical	true
+
+
+GiraffeSolver
+	Run false
+	Processors 
+		Cores 4 
+		LinSys direct
+	ConvergenceCriteria
+		ForceTolerance 1.00000000e-03
+		MomentTolerance 1.00000000e-03
+		DisplacementTolerance 1.00000000e-03
+		RotationTolerance 1.00000000e-03
+		LagrangeTolerance 1.00000000e-03
